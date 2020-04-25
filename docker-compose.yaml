@@ -1,6 +1,6 @@
 version: "3.6"
 services:
-  matthewvarga.net:
+  matthewvarga:
     build: "./matthewvarga.net/."
     ports:
       - "8080"
@@ -9,4 +9,4 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - "matthewvarga.net"
+      - "matthewvarga"
