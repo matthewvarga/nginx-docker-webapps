@@ -14,6 +14,8 @@ If you need to add another submodule, run `git submodule add <git_repo_url>`.
 
 ## Deployment
 
+TODO: update docs for creating Diffie-Helman key in correct server location
+
 This application requries only Docker and Docker-Compose to be installed on the production machine. Every submodule should include a Dockerfile to easily deploy in any environment.
 
 To build the docker images, first run `docker-compose build`. Then, once the build process is finished, run `docker-compose up -d` to start the application.

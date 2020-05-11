@@ -10,10 +10,12 @@ services:
     build: "./nginx"
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
       - webroot:/var/www
+      - dhparam:/etc/ssl/certs
     depends_on:
       - "matthewvarga"
 
@@ -31,3 +33,8 @@ volumes:
   certbot-etc:
   certbot-var:
   webroot:
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/matthew/nginx-docker-webapps/dhparam/
