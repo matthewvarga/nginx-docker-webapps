@@ -38,3 +38,4 @@ volumes:
     driver_opts:
       type: none
       device: /home/matthew/nginx-docker-webapps/dhparam/
+      o: bind
