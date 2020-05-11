@@ -210,3 +210,6 @@ The old file should look like:
     }
 
     ```
+
+
+**NOTE**: If there is an issue, check the docker logs with `docker-compose logs <service_name>` where the service_name is optional.
