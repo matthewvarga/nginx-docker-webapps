@@ -147,7 +147,7 @@ The old file should look like:
     listen 80;
     listen [::]:80;
     
-    server_name matthewvarga.net www.matthewvarga.net;
+    server_name matthewvarga.net www.matthewvarga.net matthew-varga.com www.matthew-varga.com;
 
     # letsencrypt ssl challenge file locations
     location ~ /.well-known/acme-challenge {
@@ -166,11 +166,14 @@ The old file should look like:
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
     
-    server_name matthewvarga.net www.matthewvarga.net;
+    server_name matthewvarga.net www.matthewvarga.net matthew-varga.com www.matthew-varga.com;
 
     # ssl cert locations
     ssl_certificate /etc/letsencrypt/live/matthewvarga.net/fullchain.pem
     ssl_certificate_key /etc/letsencrypt/live/matthewvarga.net/privkey.pem
+
+    ssl_certificate /etc/letsencrypt/live/matthew-varga.com/fullchain.pem
+    ssl_certificate_key /etc/letsencrypt/live/matthew-varga.com/privkey.pem
 
     ssl_buffer_size 8k;
 
@@ -196,7 +199,7 @@ The old file should look like:
 
     # server matthewvara container, and add additional security headers
     location @matthewvarga {
-        proxy_pass http://matthewvarga:8080/;
+        proxy_pass http://matthewvarga:8080;
         add_header X-Frame-Options "SAMEORIGIN" always;
         add_header X-XSS-Protection "1; mode=block" always;
         add_header X-Content-Type-Options "nosniff" always;
