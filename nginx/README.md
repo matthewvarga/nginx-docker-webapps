@@ -4,7 +4,46 @@ Below are the steps taken to achieve the nginx configuration for the server.
 
 ## Running Simple http Server
 
-TODO
+Below are the configurations for a simple http server setup running just matthewvarga.net without any ssl certifcates.
+
+_docker-compose.yaml_
+```
+version: "3.6"
+services:
+  matthewvarga:
+    build: "./matthewvagar.net/."
+    ports:
+      - "8080"
+  nginx:
+    build: "./nginx"
+    ports:
+      - "80:80"
+      depends_on:
+        - "matthewvarga"
+```
+
+_nginx.conf_
+```
+events {
+  worker_connections 1024;
+}
+http {
+  server_tokens off;
+  server {
+    listen 80;
+    server_name matthewvarga.net www.matthewvarga.net;
+    root /var/www;
+
+    location / {
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host            $http_host;
+      proxy_pass http://matthewvarga:8080/;
+    }
+  }
+}
+```
+
+
 
 ## Letsencrypt Certbot Setup
 
