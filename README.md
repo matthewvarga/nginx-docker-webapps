@@ -14,12 +14,21 @@ If you need to add another submodule, run `git submodule add <git_repo_url>`.
 
 ## Deployment
 
-TODO: update docs for creating Diffie-Helman key in correct server location
+This application requries only Docker and Docker-Compose to be installed on the production machine. Every submodule should include a Dockerfile to easily deploy in any environment. However, the ssl ciphers make use of ECDH, thus requiring for us to specify the DH paramaters for the DHE ciphers. To do so, you must create the directory `dhparam` from the root project directory, and then run the following to generte the cipher params:
 
-This application requries only Docker and Docker-Compose to be installed on the production machine. Every submodule should include a Dockerfile to easily deploy in any environment.
+```
+sudo openssl dhparam -out PROJECT_REPO/dhparam/dhparam-2048.pem 2048
+```
 
-To build the docker images, first run `docker-compose build`. Then, once the build process is finished, run `docker-compose up -d` to start the application.
+where PROJECT_REPO is the location of the project repository.
+
+
+Next, you can simply run `docker-compose build` to build the apllication, followed by `docker-compose up -d` to start it.
 
 To stop it, run `dock-compose down`.
 
 Finally, if you need to clear the build files, run `docker system prune -a`.
+
+## Troubleshooting
+
+If you encounter issues where docker containers are not running properly, you can use `docker-compose logs` to view the error logs.
