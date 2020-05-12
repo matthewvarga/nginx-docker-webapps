@@ -1,3 +1,6 @@
 [submodule "matthewvarga.net"]
 	path = matthewvarga.net
 	url = https://github.com/matthewvarga/matthewvarga.net.git
+[submodule "tftbuild.co"]
+	path = tftbuild.co
+	url = https://github.com/matthewvarga/tftbuild.co.git
