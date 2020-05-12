@@ -29,6 +29,22 @@ To stop it, run `dock-compose down`.
 
 Finally, if you need to clear the build files, run `docker system prune -a`.
 
+## ssl_renew.sh
+
+This file is a bash script that will renew the ssl certificates. Since they are only valid for 90 days, it is convenient to setup a cronjob to check if they are available for renewal, and if so, renew them. Below are the steps for setting up the cronjob, it runs the script every day at 12 (noon) to check wether or not the certs need renewal.
+
+First, start by making the script executable with: `chmod +x ssl_renew.sh`. 
+
+Next, open the root crontab file to speccify we would like to run the script at a specific interval: `sudo crontab -e`.
+
+Finally, add the following line to the bottom of the file:
+`0 12 * * * /home/matthew/nginx-docker-webapps/ssl_renew.sh >> /var/log/cron.log 2>&1`.
+
+Now you do not need to worry about renewing the certs.
+
+**NOTE:** to do a quick test run, replace the above line with
+`*/5 * * * * /home/matthew/nginx-docker-webapps/ssl_renew.sh >> /var/log/cron.log 2>&1` instead. this runs every 5 minutes opposed once a day. Next, add the `--dry run` flag to the 7th line in ssl_renew.sh to indicate we are running a test. Then, after 5 minutes have surpassed, check `tail -f /var/log/cron.log` to ensure a succesful renewal took place. Once this is done, revert the changes back to align with the steps aforementioned.
+
 ## Troubleshooting
 
 If you encounter issues where docker containers are not running properly, you can use `docker-compose logs` to view the error logs.

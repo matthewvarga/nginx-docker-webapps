@@ -8,6 +8,7 @@ services:
 
   nginx:
     build: "./nginx"
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
