@@ -29,6 +29,13 @@ To stop it, run `dock-compose down`.
 
 Finally, if you need to clear the build files, run `docker system prune -a`.
 
+
+### Modifying a Single Container
+
+If you need to update a single container, for example if one of the applications has an update (ex: matthewvarga.net), you can simply stop its individual container with: `docker-compose stop <container_name>`. The container name can be found with `docker-compose ps`.
+
+Then, you can force rebuild the container with: `docker-compose up -d --no-deps --build <container_name>`.
+
 ## ssl_renew.sh
 
 This file is a bash script that will renew the ssl certificates. Since they are only valid for 90 days, it is convenient to setup a cronjob to check if they are available for renewal, and if so, renew them. Below are the steps for setting up the cronjob, it runs the script every day at 12 (noon) to check wether or not the certs need renewal.
