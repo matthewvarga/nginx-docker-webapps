@@ -27,7 +27,7 @@ services:
       - webroot:/var/www
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/var/www --email matthew.varga@mail.utoronto.ca --agree-tos --no-eff-email --force-renewal -d matthewvarga.net -d www.matthewvarga.net
+    command: certonly --webroot --webroot-path=/var/www --email matthew.varga@mail.utoronto.ca --agree-tos --no-eff-email --force-renewal -d matthewvarga.net -d www.matthewvarga.net -d matthew-varga.com -d www.matthew-varga.com
 
 volumes:
   certbot-etc:
