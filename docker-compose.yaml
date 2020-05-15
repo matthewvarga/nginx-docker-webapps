@@ -11,6 +11,19 @@ services:
     ports:
       - "8080"
 
+  projectmanagementtools:
+    build: "./project-team_zero/."
+    ports:
+      - "8080"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - db-data: /data/db
+      - mongo-config: /data/configdb
+
   nginx:
     build: "./nginx"
     restart: unless-stopped
@@ -34,7 +47,7 @@ services:
       - webroot:/var/www
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/var/www --email matthew.varga@mail.utoronto.ca --agree-tos --no-eff-email --force-renewal -d matthewvarga.net -d www.matthewvarga.net -d matthew-varga.com -d www.matthew-varga.com -d tftbuild.co -d www.tftbuild.co
+    command: certonly --webroot --webroot-path=/var/www --email matthew.varga@mail.utoronto.ca --agree-tos --no-eff-email --staging -d matthewvarga.net -d www.matthewvarga.net -d matthew-varga.com -d www.matthew-varga.com -d tftbuild.co -d www.tftbuild.co -d project-management.tools -d www.project-management.tools
 
 volumes:
   certbot-etc:
@@ -46,3 +59,5 @@ volumes:
       type: none
       device: /home/matthew/nginx-docker-webapps/dhparam/
       o: bind
+  db-data:
+  mongo-config:

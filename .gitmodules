@@ -4,3 +4,6 @@
 [submodule "tftbuild.co"]
 	path = tftbuild.co
 	url = https://github.com/matthewvarga/tftbuild.co.git
+[submodule "project-team_zero"]
+	path = project-team_zero
+	url = https://github.com/matthewvarga/project-team_zero.git
